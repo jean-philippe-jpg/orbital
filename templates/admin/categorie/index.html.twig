@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+    <h1>Categorie index admin</h1>
+
+    {% include 'admin/categorie/partials/_table.html.twig' with {'categories': categories} %}
+   
+
+    <a href="{{ path('app_categorie_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+
+<h1 class="text-3xl font-medium text-slate-800 text-center">Bienvenue dans l'univers fasciant d'orbital premium</h1>
+<p class="text-slate-500 text-center">The people behind the product, passionate about what they do.</p>
+<div class="flex flex-wrap items-center justify-center gap-6 mt-12">
+<p class="mt-4 text-lg">{{ services[0].categorie.titre }}</p>
+
+    {% for service in services %}
+     <div class=" bg-black text-white rounded-2xl">
+        <div class="relative -mt-px overflow-hidden rounded-2xl">
+            <img  src="/services/images/{{ service.imageFileName }}" alt="photo of {{ service.titre }}" class="h-[270px] w-full rounded-2xl hover:scale-105 transition-all duration-300 object-cover object-top">
+            <div class="absolute bottom-0 z-10 h-60 w-full bg-gradient-to-t pointer-events-none from-black to-transparent"></div>
+        </div>
+        <div class="px-4 pb-6 text-center">
+             
+            <p class="mt-4 text-lg">{{ service.titre }}</p>
+            <p class="text-sm font-medium bg-gradient-to-r from-[#8B5CF6] via-[#9938CA] to-[#E0724A] text-transparent bg-clip-text"> {{ service.description }}</p>
+        </div>
+    </div>    
+        {% endfor %}
+   
+   
