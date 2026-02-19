@@ -18,7 +18,7 @@ class ServiceRepository extends ServiceEntityRepository
     }
 
 
-    public function findOneById(int $id): array
+    public function findOneById( $id): array
        {
 
            $entityManager = $this->getEntityManager();

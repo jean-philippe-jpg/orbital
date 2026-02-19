@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Detail;
 use App\Form\Detail1Type;
+use App\Form\DetailType;
 use App\Repository\DetailRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,7 @@ final class DetailController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $detail = new Detail();
-        $form = $this->createForm(Detail1Type::class, $detail);
+        $form = $this->createForm(DetailType::class, $detail);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +54,7 @@ final class DetailController extends AbstractController
     #[Route('/{id}/edit', name: 'app_detail_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Detail $detail, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Detail1Type::class, $detail);
+        $form = $this->createForm(DetailType::class, $detail);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
