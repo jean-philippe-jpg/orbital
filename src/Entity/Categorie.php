@@ -31,9 +31,20 @@ class Categorie
     #[ORM\OneToMany(targetEntity: Service::class, mappedBy: 'categorie')]
     private Collection $service;
 
+      /**
+     * @var Collection<int, comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'service')]
+    private Collection $comments;
+
+    /**
+     * @var Collection<int, Comment>
+     */
+  
     public function __construct()
     {
         $this->service = new ArrayCollection();
+           $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +112,35 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($service->getCategorie() === $this) {
                 $service->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+     /**
+     * @return Collection<int, comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getCategorie() === $this) {
+                $comment->setCategorie(null);
             }
         }
 

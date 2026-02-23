@@ -37,6 +37,8 @@ class Service
     public function __construct()
     {
         $this->detail = new ArrayCollection();
+     
+       
     }
 
     public function getId(): ?int
@@ -121,4 +123,6 @@ class Service
 
         return $this;
     }
+
+   
 }

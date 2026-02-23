@@ -1,0 +1,15 @@
+
+
+<div>
+
+{{form(form)}}
+
+</div>
+
+{% for comments in comment %}
+
+<div class="comment">
+    <p><strong>{{ comments.username }}</strong> - {{ comments.date|date('d-m-Y H:i ') }}</p>
+    <p>{{ comments.message }}</p>
+    
+{% endfor %}

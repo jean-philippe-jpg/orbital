@@ -3,14 +3,18 @@
 namespace App\Controller;
 
 
-
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\ContactType;
 use App\Repository\CategorieRepository;
+use App\Repository\CommentRepository;
 use App\Repository\ServiceRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 //use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
@@ -25,6 +29,8 @@ final class HomeController extends AbstractController
             'categories' => $categorieRepository->findAll(),
         ]);
     }
+
+     
 
      #[Route('/plaque', name: 'app_plaque')]
     public function plaque(): Response
@@ -67,13 +73,29 @@ final class HomeController extends AbstractController
         ]);
     }
     
- #[Route('/{id}', name: 'app_service.join_index', methods: ['GET'])]
-    public function service( ServiceRepository $serviceRepository, $id): Response
+ #[Route('/{id}', name: 'app_service.join_index', )]
+    public function service(ServiceRepository $serviceRepository, EntityManagerInterface $em, Request $request, CommentRepository $commentRepository, CategorieRepository $categorieRepository, $id): Response
     {        $service = $serviceRepository->findOneById($id);
+            $categorie = $categorieRepository->findOneBy(['id' => $id]);
              
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+              if ($form->isSubmitted() && $form->isValid()) {
+                
+                     $comment->setCategorie($categorie);
+                     $em->persist($comment);
+                     $em->flush();
+        
+
+        }
+       
 
         return $this->render('service/index.html.twig', [
-            'services' => $service
+            'services' => $service,
+            'form' => $form,
+            'comment' => $commentRepository->findBy(['categorie' => $categorieRepository->findOneBy(['id' => $id])]),
         ]);
     }
 

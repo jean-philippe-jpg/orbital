@@ -40,7 +40,7 @@ final class ServiceController extends AbstractController
 
         return $this->render('admin/service/new.html.twig', [
             'service' => $service,
-            'form' => $form,
+            
         ]);
     }
 
