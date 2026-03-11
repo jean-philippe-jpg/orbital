@@ -1,0 +1,53 @@
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <table class="w-full text-sm text-left rtl:text-right text-fg-brand-subtle">
+        <thead class="text-sm text-white bg-brand border-b border-brand-light">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Titre
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Description
+                </th>
+               
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Categorie
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Voir
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Suprimer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for service in services %}
+            <tr  class="bg-brand border-b border-brand-light hover:bg-brand-strong">
+  
+                <td class="px-6 py-4">{{ service.id}}</td>
+                <td class="px-6 py-4">{{ service.titre }}</td>
+                <td class="px-6 py-4">{{ service.description }}</td>
+                <td class="px-6 py-4">{{ service.categorie.titre }}</td>
+                <td>
+                    <a href="{{ path('app_service_show', {'id': service.id}) }}">show</a>
+                </td>
+                 <td>
+                    <a href="{{ path('app_service_edit', {'id': service.id}) }}">edit</a>
+                  </td>
+                  <td>
+                    <a href="{{ path('app_service_delete', {'id': service.id}) }}">delete</a>
+                  </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_service_new') }}">Create new</a>
+</div>
+          

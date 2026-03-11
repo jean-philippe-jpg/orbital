@@ -1,41 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detail index{% endblock %}
+{% block title %}Distribution{% endblock %}
 
 {% block body %}
-    <h1>Detail index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>ImageFileName</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Tarif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+   {% include 'detail/partials/_plaque.html.twig' %}
+<div id="vehicule"></div>
+      <div class="m-[auto] w-[400px] mt-[50px] mb-[100px]">
+          
         {% for detail in details %}
-            <tr>
-                <td>{{ detail.id }}</td>
-                <td>{{ detail.imageFileName }}</td>
-                <td>{{ detail.titre }}</td>
-                <td>{{ detail.description }}</td>
-                <td>{{ detail.tarif }}</td>
-                <td>
-                    <a href="{{ path('app_detail_show', {'id': detail.id}) }}">show</a>
-                    <a href="{{ path('app_detail_edit', {'id': detail.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            
+             <div class=" bg-gray-500 mt-[20px] border-[2.5px] border-[#FEDA08] rounded-lg p-4" >
+                <h1 class="font-bold text-xl text-[#FEDA08]">{{ detail.titre }}</h1>
 
-    <a href="{{ path('app_detail_new') }}">Create new</a>
+               <br>
+                <div class=" font-sans text-lg">{{ detail.description }}</div>
+                <div class="text-[#27F531] font-bold">{{ detail.tarif }} €</div>
+             </div>
+        {% endfor %}
+       </div>
+
+      
 {% endblock %}

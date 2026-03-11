@@ -16,6 +16,22 @@ class DetailRepository extends ServiceEntityRepository
         parent::__construct($registry, Detail::class);
     }
 
+
+
+            public function findOneById( $id): array
+       {
+
+           $entityManager = $this->getEntityManager();
+
+           $query = $entityManager->createQuery(
+               'SELECT d, s
+               FROM App\Entity\Detail d
+               JOIN d.service s
+               WHERE s.id = :id'
+           )->setParameter('id', $id);
+            
+            return $query->getResult();
+       }
     //    /**
     //     * @return Detail[] Returns an array of Detail objects
     //     */

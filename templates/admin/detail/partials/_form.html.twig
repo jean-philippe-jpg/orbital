@@ -1,4 +1,23 @@
+<div class="w-[300px] mx-auto mt-10">
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+     <div>{{ form_label(form.imageFileName) }}
+     {{ form_widget(form.imageFileName) }}</div>
+
+   <div class="mt-5">{{ form_label(form.titre) }}
+    {{ form_widget(form.titre) }}</div>
+
+    <div class="mt-5">{{ form_label(form.description) }}
+    {{ form_widget(form.description) }}</div>
+
+      
+     <div class="mt-5">{{ form_label(form.tarif) }}
+    {{ form_widget(form.tarif) }}</div>
+
+          <div class="mt-5">{{ form_label(form.service) }}
+    {{ form_widget(form.service) }}</div>
+   
+    
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-5">{{ form_widget(form.save) }}</button>
 {{ form_end(form) }}
+       
+</div>

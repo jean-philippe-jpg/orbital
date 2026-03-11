@@ -1,0 +1,61 @@
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <table class="w-full text-sm text-left rtl:text-right text-fg-brand-subtle">
+        <thead class="text-sm text-white bg-brand border-b border-brand-light">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Titre
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Description
+                </th>
+               <th scope="col" class="px-6 py-3 font-medium">
+                   Tarif
+                </th>
+               
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Editer
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Voir
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Suprimer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for details in detail %}
+            <tr  class="bg-brand border-b border-brand-light hover:bg-brand-strong">
+  
+                <td class="px-6 py-4">{{ details.id}}</td>
+                <td class="px-6 py-4">{{ details.imageFileName }}</td>
+                <td class="px-6 py-4">{{ details.titre }}</td>
+                <td class="px-6 py-4">{{ details.description }}</td>
+                <td class="px-6">{{ details.tarif }}</td>
+                
+               
+                <td>
+                    <a href="{{ path('app_detail_show', {'id': details.id}) }}">show</a>
+                </td>
+                 <td>
+                    <a href="{{ path('app_detail_edit', {'id': details.id}) }}">edit</a>
+                  </td>
+                  <td>
+                    <a href="{{ path('app_detail_delete', {'id': details.id}) }}">delete</a>
+                  </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_detail_new') }}">Create new</a>
+</div>
+          
+
+ 

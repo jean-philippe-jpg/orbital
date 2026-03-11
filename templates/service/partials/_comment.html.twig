@@ -1,15 +1,30 @@
+<div class="ml-[600px] mt-10 mb-10">
+    <div class="font-bold">
+        {{form_label(form.username)}}
+    </div>
+    <div>
+        {{form_widget(form.username)}}
+    </div>
+    <div class="font-bold">
+        {{form_label(form.message)}}
+     </div>
+     <div >
+         {{form_widget(form.message)}}
+     </div>
+     <div class="font-bold">
+            {{form_widget(form.envoyer)}}
+     </div>
+</div>
 
 
 <div>
-
-{{form(form)}}
-
+    {% for comments in comment %}
+        <div class="bg-gray-100 p-4  mb-4 w-[300px] ml-[50px]">
+            <h3 class="text-sm font-semibold">{{ comments.username }}</h3>
+            <p class="text-sm ">{{ comments.message }}</p>
+        </div>
+    {% endfor %}
 </div>
 
-{% for comments in comment %}
+     
 
-<div class="comment">
-    <p><strong>{{ comments.username }}</strong> - {{ comments.date|date('d-m-Y H:i ') }}</p>
-    <p>{{ comments.message }}</p>
-    
-{% endfor %}

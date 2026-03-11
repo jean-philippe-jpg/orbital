@@ -18,22 +18,21 @@ class CommentType extends AbstractType
         $builder
           
             ->add('username', TextType::class, [
-                'label' => 'Username',
+                'label' => 'Nom utilisateur',
                 'attr' => [
-                    'placeholder' => 'Enter your username',
+                    'placeholder' => 'Prenom',
                     'class' => 'form-control',
                 ],
             ])
             ->add('message', TextType::class, [
                 'label' => 'Message',
                 'attr' => [
-                    'placeholder' => 'Enter your message',
+                    'placeholder' => 'Message',
                     'class' => 'form-control',
+                    
                 ],
             ])
-            ->add('date', null,  [
-                'data' => new \DateTime(),
-            ])
+          
 
             ->add('envoyer', SubmitType::class)
         ;

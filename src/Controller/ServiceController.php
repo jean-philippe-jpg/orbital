@@ -32,6 +32,7 @@ final class ServiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $entityManager->persist($service);
             $entityManager->flush();
 
@@ -40,6 +41,7 @@ final class ServiceController extends AbstractController
 
         return $this->render('admin/service/new.html.twig', [
             'service' => $service,
+            'form' => $form,
             
         ]);
     }

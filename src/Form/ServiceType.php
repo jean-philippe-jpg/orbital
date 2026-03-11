@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Service;
 use App\Entity\Categorie;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
+use App\Entity\Service;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DomCrawler\Image;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ServiceType extends AbstractType
 {
@@ -25,8 +26,12 @@ class ServiceType extends AbstractType
             ->add('description')
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'titre',
             ])
+                ->add('save', SubmitType::class, [
+                    'label' => 'Save',
+                    'attr' => ['class' => 'btn btn-primary mt-3']
+                ])
         ;
     }
 

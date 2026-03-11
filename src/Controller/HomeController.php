@@ -8,12 +8,11 @@ use App\Form\CommentType;
 use App\Form\ContactType;
 use App\Repository\CategorieRepository;
 use App\Repository\CommentRepository;
+use App\Repository\DetailRepository;
 use App\Repository\ServiceRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -73,7 +72,7 @@ final class HomeController extends AbstractController
         ]);
     }
     
- #[Route('/{id}', name: 'app_service.join_index', )]
+ #[Route('/services{id}', name: 'app_service.join_index', )]
     public function service(ServiceRepository $serviceRepository, EntityManagerInterface $em, Request $request, CommentRepository $commentRepository, CategorieRepository $categorieRepository, $id): Response
     {        $service = $serviceRepository->findOneById($id);
             $categorie = $categorieRepository->findOneBy(['id' => $id]);
@@ -85,10 +84,9 @@ final class HomeController extends AbstractController
               if ($form->isSubmitted() && $form->isValid()) {
                 
                      $comment->setCategorie($categorie);
+                     $comment->setDate(new \DateTime());
                      $em->persist($comment);
                      $em->flush();
-        
-
         }
        
 
@@ -99,6 +97,19 @@ final class HomeController extends AbstractController
         ]);
     }
 
-    
-   
+    #[Route('/detailservices{id}', name: 'app_details.join_services', )]
+    public function detail(DetailRepository $detailRepository, ServiceRepository $serviceRepository, EntityManagerInterface $em, Request $request, $id): Response
+
+    {
+            $detail = $detailRepository->findOneById($id);
+              
+           
+               
+        return $this->render('detail/index.html.twig', [
+            
+             'details' => $detail,
+           
+        ]);
+             
+    }    
 }

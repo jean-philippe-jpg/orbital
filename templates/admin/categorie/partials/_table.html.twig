@@ -1,28 +1,57 @@
  
- <table class="border-collapse border border-gray-400 ...">
-  <thead>
-    <tr>
-      <th class="border border-gray-300 ...">Titre</th>
-      <th class="border border-gray-300 ...">Description</th>
-      <th class="border border-gray-300 ...">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for categorie in categories %}
+
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <table class="w-full text-sm text-left rtl:text-right text-fg-brand-subtle">
+        <thead class="text-sm text-white bg-brand border-b border-brand-light">
             <tr>
-                <td>{{ categorie.titre }}</td>
-                <td>{{ categorie.description }}</td>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Titre
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Description
+                </th>
+               
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Editer
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Voir
+                </th>
+                 <th scope="col" class="px-6 py-3 font-medium">
+                    Suprimer
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for categorie in categories %}
+            <tr  class="bg-brand border-b border-brand-light hover:bg-brand-strong">
+  
+                <td class="px-6 py-4">{{ categorie.id}}</td>
+                <td class="px-6 py-4">{{ categorie.titre }}</td>
+                <td class="px-6 py-4">{{ categorie.description }}</td>
                
                 <td>
                     <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}">show</a>
-                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
                 </td>
+                 <td>
+                    <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}">edit</a>
+                  </td>
+                  <td>
+                    <a href="{{ path('app_categorie_delete', {'id': categorie.id}) }}">delete</a>
+                  </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
-  </tbody>
-</table>
+        </tbody>
+    </table>
+    <a href="{{ path('app_categorie_new') }}">Create new</a>
+</div>
+          
+
  

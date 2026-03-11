@@ -18,8 +18,8 @@ final class DetailController extends AbstractController
     #[Route(name: 'app_detail_index', methods: ['GET'])]
     public function index(DetailRepository $detailRepository): Response
     {
-        return $this->render('detail/index.html.twig', [
-            'details' => $detailRepository->findAll(),
+        return $this->render('admin/detail/index.html.twig', [
+            'detail' => $detailRepository->findAll(),
         ]);
     }
 
